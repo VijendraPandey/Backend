@@ -2,19 +2,17 @@
 
 This is a simple Notes Taking mini-project built using **Node.js** and **Express.js**.
 
-Currently, the project supports adding new notes through a POST request. The notes are stored in memory temporarily.
-
-In the upcoming days, the project will be enhanced with more features like:
-
-- Fetching the list of notes (GET)
-- Updating a note (PUT)
-- Deleting a note (DELETE)
+Currently, the project supports adding, reading, updating, and deleting notes using REST APIs.  
+The notes are stored temporarily in memory.
 
 ---
 
 ## 📌 Features Implemented
 
-✔ Add Notes using POST `/notes`
+✔ Add Notes using POST `/notes`  
+✔ Get All Notes using GET `/notes`  
+✔ Update a Note using PATCH `/notes/:index`  
+✔ Delete a Note using DELETE `/notes/:index`
 
 ---
 
@@ -26,7 +24,7 @@ In the upcoming days, the project will be enhanced with more features like:
 
 2️⃣ Start the server
 
-    npm start
+    npx nodemon server.js
 
 3️⃣ Server will start on:
 
@@ -36,60 +34,91 @@ In the upcoming days, the project will be enhanced with more features like:
 
 ## 📩 API Usage
 
+### ➤ Get All Notes (GET `/notes`)
+
+Example Request:
+
+    GET http://localhost:3000/notes
+
+Example Response:
+
+    [
+      {
+        "title": "My First Note",
+        "content": "This is a sample note"
+      }
+    ]
+
+---
+
 ### ➤ Add a Note (POST `/notes`)
 
-#### Request Body Example
+Request Body Example:
 
     {
       "title": "My First Note",
       "content": "This is a sample note"
     }
 
----
-
-### 🔹 Using Postman
-
-1. Create a **POST** request  
-2. URL → `http://localhost:3000/notes`  
-3. Go to **Body** → Select **raw** → Choose **JSON**  
-4. Enter JSON data like the example above  
-5. Hit **Send**
-
----
-
-## 📜 Response Example
+Response:
 
     {
-      "message": "Note added successfully",
-      "notes": [
-        {
-          "title": "My First Note",
-          "content": "This is a sample note"
-        }
-      ]
+      "message": "Note added successfully"
+    }
+
+---
+
+### ➤ Update a Note (PATCH `/notes/:index`)
+
+Example Request URL:
+
+    PATCH http://localhost:3000/notes/0
+
+Request Body Example:
+
+    {
+      "content": "Updated content"
+    }
+
+Response:
+
+    {
+      "message": "Note updated successfully"
+    }
+
+---
+
+### ➤ Delete a Note (DELETE `/notes/:index`)
+
+Example Request:
+
+    DELETE http://localhost:3000/notes/0
+
+Response:
+
+    {
+      "message": "Note deleted successfully"
     }
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Node.js
-- Express.js
+- Node.js  
+- Express.js  
 
 ---
 
 ## 📚 Concepts Learned
 
-- **npx** → Runs Node packages without installing them globally.  
-- **nodemon** → Automatically restarts the server when code changes.  
+- **npx** → Runs Node packages without global installation  
+- **nodemon** → Automatically restarts server on code changes  
 - **REST API Methods** →  
-  - `GET` → Retrieve data  
-  - `POST` → Send/add data  
-  - `PUT` → Update data  
-  - `DELETE` → Remove data  
-- **req.body** → Used to access data sent in the request body (mainly in POST/PUT).  
-- **req.params** → Used to get dynamic values from the route URL. Example: `/notes/:id`.  
-- **req.query** → Used to receive URL query parameters like `?search=note1`.  
-- **express.json()** → Middleware that converts incoming JSON request bodies into JavaScript objects so you can access them using `req.body`.
-
----
+  - `GET` → retrieve data  
+  - `POST` → add data  
+  - `PATCH` → update partial data  
+  - `DELETE` → remove data  
+- **req.body** → Read data sent in request body  
+- **req.params** → Read dynamic values in URL (`/notes/:index`)  
+- **req.query** → Read query parameters (`?search=note1`)  
+- **express.json()** → Parse incoming JSON request bodies
