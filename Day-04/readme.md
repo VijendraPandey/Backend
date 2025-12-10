@@ -95,14 +95,3 @@ PATCH /notes/:id
       "content": "Updated Content"
     }
 
----
-
-## 📚 Summary
-
-Today I learned how to:
-- Build and structure CRUD API routes in Express
-- Connect a Node.js app to MongoDB using Mongoose
-- Understand Schema (data structure) and Model (database object)
-- Organize backend files in a scalable way
-
-I now have a strong foundation in backend development! 🚀
