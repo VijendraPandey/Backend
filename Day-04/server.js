@@ -1,7 +1,6 @@
 const express = require('express');
 const connectToDB = require('./src/db/db');
-
-connectToDB();
+const noteModel = require('./src/models/note.model.js');
 
 const app = express();
 
@@ -11,10 +10,57 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 })
 
-app.post('/notes', (req, res) => {
-    console.log(req.body);
+app.get('/notes', async (req, res) => {
+    const notes = await noteModel.find();
+
+    res.json({
+        message: 'Notes fetched successfully',
+        notes: notes
+    })
+});
+
+app.post('/notes', async (req, res) => {
+    const { title, content } = req.body;
+    
+    await noteModel.create({
+        title,
+        content
+    });
+
+    res.json({
+        message: 'Note created successfully'
+    })
+});
+
+app.delete('/notes/:id', async (req, res) => {
+    const noteId = req.params.id;
+
+    await noteModel.findByIdAndDelete({
+        _id: noteId
+    });
+
+    res.json({
+        message: 'Note deleted successfully'
+    });
+});
+
+app.patch('/notes/:id', async (req, res) => {
+    const noteId = req.params.id;
+
+    const { title, content } = req.body;
+
+    await noteModel.findByIdAndUpdate(noteId, {
+        title,
+        content
+    });
+
+    res.json({
+        message: 'Note updated successfully'
+    });
 })
 
+connectToDB()
+
 app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-});
+    console.log('Server is running on http://localhost:3000');
+})
