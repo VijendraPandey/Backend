@@ -1,0 +1,155 @@
+/* 🌈 Background Neon Particles */
+body {
+  background: radial-gradient(circle at top left, #2a003e, #000);
+  overflow-x: hidden;
+}
+
+/* Floating neon blobs */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 20rem;
+  height: 20rem;
+  background: #ff5e9e55;
+  filter: blur(120px);
+  z-index: -1;
+  border-radius: 50%;
+  animation: float 12s infinite alternate ease-in-out;
+}
+body::after {
+  right: 10%;
+  bottom: 10%;
+  background: #6b5bff55;
+}
+
+@keyframes float {
+  from { transform: translateY(-30px); }
+  to { transform: translateY(30px); }
+}
+
+/* Main Wrapper */
+.mood-songs {
+  width: 100%;
+  padding: 4rem;
+  padding-top: 1rem;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Headings */
+.moody-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #ff5e9e, #7f6bff, #46c2ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: glow 4s ease-in-out infinite;
+}
+
+.recommended-title {
+  font-size: 1.4rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 5px #ff5e9e); }
+  50% { filter: drop-shadow(0 0 15px #7f6bff); }
+  100% { filter: drop-shadow(0 0 5px #ff5e9e); }
+}
+
+/* Song Card */
+.song {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.8rem;
+  margin: 1rem 0;
+  border-radius: 1.3rem;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: 0.35s ease;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+/* 3D Scale Effect */
+.song:hover {
+  transform: scale(1.03);
+}
+
+/* Active Song Glow */
+.song.active {
+  border-color: #ff5e9e;
+  box-shadow: 0 0 18px rgba(255, 94, 158, 0.6);
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Equalizer Animation */
+.equalizer {
+  display: flex;
+  gap: 4px;
+}
+
+.equalizer div {
+  width: 4px;
+  height: 10px;
+  background: #ff5e9e;
+  border-radius: 2px;
+  animation: bounce 0.7s infinite alternate ease;
+}
+
+.equalizer div:nth-child(2) { animation-delay: 0.15s; }
+.equalizer div:nth-child(3) { animation-delay: 0.3s; }
+.equalizer div:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes bounce {
+  from { height: 5px; }
+  to { height: 18px; }
+}
+
+/* Play/Pause Icons */
+.play-section i {
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+  color: #fff;
+}
+
+.play-section i:hover {
+  transform: scale(1.18);
+  color: #ff5e9e;
+}
+
+/* Hide audio element */
+.play-section audio { display: none; }
+
+/* Progress Bar */
+.progress-container {
+  width: 94%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  position: absolute;
+  bottom: 0.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff5e9e, #7f6bff);
+  transition: width 0.15s linear;
+}
+
