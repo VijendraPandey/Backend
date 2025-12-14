@@ -6,12 +6,6 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGE_KIT_URL_ENDPOINT,
 });
 
-console.log(process.env.IMAGE_KIT_PUBLIC_KEY);
-console.log(process.env.IMAGE_KIT_PRIVATE_KEY);
-console.log(process.env.IMAGE_KIT_URL_ENDPOINT);
-
-
-
 const uploadAudioToImageKit = async (file) => {
   try {
     if (!file) {
